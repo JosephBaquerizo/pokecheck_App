@@ -1,19 +1,20 @@
 import React from "react";
-import { Image, StyleSheet, View, Text, TouchableHighlight } from "react-native";
+import { Image, StyleSheet, View, Text, TouchableOpacity } from "react-native";
 //import { Icon } from "react-native-elements";
 
 const BottomBar = () => {
     return (
         <View style={styles.bottomBar}>
-            <TouchableHighlight 
+            <TouchableOpacity 
                 onPress={() => console.log("pokeball")}
                 style={styles.touch}
+                enabled={false}
             >
                 <Image
                     style={styles.pokeball}
                     source={require("../../assets/pokebola.png")}
                 />
-            </TouchableHighlight>
+            </TouchableOpacity>
         </View>
     )
 }
@@ -34,7 +35,7 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     touch: {
-        position: "absolute",
+        position: "absolute"
     }
 })
 
