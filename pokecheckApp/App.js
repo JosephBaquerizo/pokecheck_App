@@ -19,37 +19,34 @@ class App extends Component {
 
   async componentDidMount() {
     this.setState({loading: true});
-    //for (let i = 1; i < 152; i++) {
-    const response = await fetch('https://pokeapi.co/api/v2/pokemon/1');
-    const json = await response.json();
-    const info = {
-      name: json.name,
-      id: json.id,
-      image: json.sprites.front_default,
-      typeList: json.types[0].type.name,
-      height: json.height,
-      weight: json.weight
+    for (let i = 1; i < 20; i++) {
+      let response = await fetch(`https://pokeapi.co/api/v2/pokemon/${i}`);
+      let json = await response.json();
+      let info = {
+        name: json.name,
+        id: json.id,
+        image: json.sprites.front_default,
+        typeList: json.types[0].type.name,
+        height: json.height,
+        weight: json.weight
+      };
+      this.setState({pokemones: this.state.pokemones.concat(info)});
     }
-    //}
     this.setState({loading: false});
-    this.setState({pokemones: info});
     console.log(this.state.pokemones);
-    //console.log(this.state.loading);
   }
 
   render () {
     return (
       <View style={styles.container}>
         <TopBar/>
-        <PokemonContainer/>
+        <PokemonContainer pokemones={this.state.pokemones}/>
         <BottomBar/>
         <Loading isVisible={this.state.loading} text="Cargando..."/>
       </View>
     );
   }
 }
-
-//<Loading isVisible={this.loading} text="Cargando..."/>
 
 const styles = StyleSheet.create({
   container: {
