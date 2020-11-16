@@ -10,6 +10,8 @@ const PokemonList = ({ pokemones }) => {
                     image={pokemon.image}
                     typeList={pokemon.typeList}
                     id={pokemon.id}
+                    height={pokemon.height}
+                    weight={pokemon.weight}
                />
     })
     return (

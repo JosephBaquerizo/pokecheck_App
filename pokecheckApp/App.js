@@ -33,7 +33,6 @@ class App extends Component {
       this.setState({pokemones: this.state.pokemones.concat(info)});
     }
     this.setState({loading: false});
-    console.log(this.state.pokemones);
   }
 
   render () {
