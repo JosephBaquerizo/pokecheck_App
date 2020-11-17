@@ -42,7 +42,7 @@ const PokemonCard = ({ name, image, typeList, id, weight, height }) => {
                     </Text>
                 </View>
             </TouchableWithoutFeedback>
-            <Modal isVisible={showModal} setIsVisible={setShowModal} borderColor={ColorType[typeList]}>
+            <Modal isVisible={showModal} setIsVisible={setShowModal}>
                 <View style={styles.modal}>
                     <View style={styles.leftModal}>
                         <Image 
@@ -86,7 +86,7 @@ const capitalize = (s) => {
 
 const styles = StyleSheet.create({
     picture: {
-        width: 100,
+        width: 125,
         height: 125
     },
     containerPic: {
