@@ -55,7 +55,7 @@ const BottomBar = () => {
             </TouchableOpacity>
             <Modal isVisible={showModal} setIsVisible={setShowModal}>
                 <Input
-                    placeholder="Search pokemon by name"
+                    placeholder="Search pokemon by name or id #"
                     onChange={(e) => onChange(e)}
                     rightIcon={
                         <Icon 

@@ -13,13 +13,13 @@ class App extends Component {
     super();
     this.state = {
       pokemones: [],
-      loading: false
+      loading: false,
     }
   }
 
   async componentDidMount() {
     this.setState({loading: true});
-    for (let i = 1; i < 20; i++) {
+    for (let i = 1; i < 10; i++) {
       let response = await fetch(`https://pokeapi.co/api/v2/pokemon/${i}`);
       let json = await response.json();
       let info = {
@@ -39,13 +39,17 @@ class App extends Component {
     return (
       <View style={styles.container}>
         <TopBar/>
-        <PokemonContainer pokemones={this.state.pokemones}/>
+        <PokemonContainer 
+          pokemones={this.state.pokemones} 
+        />
         <BottomBar/>
         <Loading isVisible={this.state.loading} text="Cargando..."/>
       </View>
     );
   }
 }
+
+//uploadPokemons={this.uploadPokemons}
 
 const styles = StyleSheet.create({
   container: {

@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { Overlay } from "react-native-elements";
 
 const Modal = ({ isVisible, setIsVisible, children }) => {
@@ -16,7 +16,9 @@ const Modal = ({ isVisible, setIsVisible, children }) => {
             overlayStyle={styles.overlay}
             onBackdropPress={closeModal}
         >
-            {children}
+            <View>
+                {children}
+            </View>
         </Overlay>
     )
 }

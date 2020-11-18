@@ -52,6 +52,11 @@ const UnderSearch = ({ pokemon }) => {
                 <Text style={{color: "red"}}>Ups! Something wrong happened</Text>
             </View>
         )
+    } else {
+        return (
+            <View>
+            </View>
+        )
     }
 }
 

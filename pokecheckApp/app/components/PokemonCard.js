@@ -24,6 +24,7 @@ const PokemonCard = ({ name, image, typeList, id, weight, height }) => {
                     borderWidth: 3,
                     borderColor: ColorType[typeList],
                     marginTop: 40,
+                    marginBottom: 12,
                     justifyContent: "center",
                     alignItems: "center",
                     width: 150
