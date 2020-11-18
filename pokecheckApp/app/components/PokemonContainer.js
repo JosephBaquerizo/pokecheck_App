@@ -3,9 +3,11 @@ import { StyleSheet, ScrollView, Text, View, Dimensions, ImageBackground } from 
 import PokemonList from "./PokemonList";
 
 const PokemonContainer = ({ pokemones }) => {
+
+
     return (
         <View style={styles.viewContainer}>
-            <View style={{height: 515}}>
+            <View style={styles.fixedView}>
                 <ImageBackground
                     style={styles.backImage}
                     source={require("../../assets/snorlax.jpg")}
@@ -58,7 +60,7 @@ const screenWidth = Dimensions.get('window').width;
 const styles = StyleSheet.create({
     scrollContainer: {
         backgroundColor: "transparent",
-        width: screenWidth
+        width: screenWidth,
     },
     viewContainer: {
         flex: 1,
@@ -74,6 +76,9 @@ const styles = StyleSheet.create({
         left: 0,
         right: 0,
         bottom: 0
+    },
+    fixedView: {
+        height: "100%"
     }
 })
 

@@ -15,7 +15,7 @@ const TopBar = () => {
 
 const styles = StyleSheet.create({
     topBar: {
-        height: 100,
+        height: "15%",
         width: "100%",
         backgroundColor: "#fb503b",
         alignItems: "center"
@@ -23,7 +23,8 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         aspectRatio: 2,
-        resizeMode: 'contain'
+        resizeMode: 'contain',
+        marginTop: 15
     }
 })
 
