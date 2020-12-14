@@ -1,12 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {Component, useEffect} from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Alert } from 'react-native';
 import MainView from "./app/screens/MainView";
 import TopBar from "./app/components/TopBar";
 import PokemonContainer from "./app/components/PokemonContainer";
 import BottomBar from "./app/components/BottomBar";
 import Loading from "./app/components/Loading";
 import { Audio } from "expo-av";
+import NetInfo from "@react-native-community/netinfo"
 
 
 class App extends Component {
@@ -15,11 +16,27 @@ class App extends Component {
     super();
     this.state = {
       pokemones: [],
-      loading: false
+      loading: false,
     }
   }
 
   async componentDidMount() {
+    NetInfo.fetch().then(state => {
+      if (state.isConnected == true) {
+        Alert.alert(
+          "Connection Error",
+          "Please verify that your device is connected to a network",
+          [
+            {
+              text: "Cancel",
+              style: "cancel"
+            },
+            { text: "OK"}
+          ],
+          { cancelable: false }
+        );
+      }
+    });
     this.setState({loading: true});
     for (let i = 1; i < 10; i++) {
       let response = await fetch(`https://pokeapi.co/api/v2/pokemon/${i}`);
@@ -63,7 +80,7 @@ class App extends Component {
           pokemones={this.state.pokemones} 
         />
         <BottomBar/>
-        <Loading isVisible={this.state.loading} text="Cargando..."/>
+        <Loading isVisible={this.state.loading} text="Loading..."/>
       </View>
     );
   }

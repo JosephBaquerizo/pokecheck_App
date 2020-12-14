@@ -68,7 +68,7 @@ const BottomBar = () => {
                 </Input>
                 <UnderSearch pokemon={pokemon}/>
             </Modal>
-            <Loading isVisible={loading} text="Cargando..."/>
+            <Loading isVisible={loading} text="Loading..."/>
         </View>
     )
 }
