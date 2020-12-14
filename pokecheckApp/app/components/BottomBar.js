@@ -17,7 +17,7 @@ const BottomBar = () => {
     }
 
     const onChange = (e) => {
-        setSearchPokemon((e.nativeEvent.text).toLowerCase());
+        setSearchPokemon((e.nativeEvent.text).toLowerCase().trim());
     }
 
     async function pokemonRequest() {
