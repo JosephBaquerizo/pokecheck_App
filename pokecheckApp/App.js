@@ -15,43 +15,23 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      pokemones: [],
       loading: false,
     }
   }
 
   async componentDidMount() {
     NetInfo.fetch().then(state => {
-      if (state.isConnected == true) {
+      if (state.isConnected == false) {
         Alert.alert(
           "Connection Error",
           "Please verify that your device is connected to a network",
           [
-            {
-              text: "Cancel",
-              style: "cancel"
-            },
             { text: "OK"}
           ],
           { cancelable: false }
         );
       }
     });
-    this.setState({loading: true});
-    for (let i = 1; i < 10; i++) {
-      let response = await fetch(`https://pokeapi.co/api/v2/pokemon/${i}`);
-      let json = await response.json();
-      let info = {
-        name: json.name,
-        id: json.id,
-        image: json.sprites.front_default,
-        typeList: json.types[0].type.name,
-        height: json.height,
-        weight: json.weight
-      };
-      this.setState({pokemones: this.state.pokemones.concat(info)});
-    }
-    this.setState({loading: false});
     Audio.setAudioModeAsync({
       allowsRecordingIOS: false,
       interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX,
@@ -76,9 +56,7 @@ class App extends Component {
     return (
       <View style={styles.container}>
         <TopBar/>
-        <PokemonContainer 
-          pokemones={this.state.pokemones} 
-        />
+        <PokemonContainer />
         <BottomBar/>
         <Loading isVisible={this.state.loading} text="Loading..."/>
       </View>

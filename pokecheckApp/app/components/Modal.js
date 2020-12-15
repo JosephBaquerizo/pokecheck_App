@@ -26,7 +26,7 @@ const Modal = ({ isVisible, setIsVisible, children }) => {
 const styles = StyleSheet.create({
     overlay: {
         height: "auto",
-        width: "90%",
+        width: "60%",
         backgroundColor: "#fff",
         borderRadius: 10,
         borderWidth: 2,

@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Image, Text, StyleSheet } from "react-native";
+import { ProgressBar, Colors } from "react-native-paper";
 import Loading from "./Loading";
 
 const UnderSearch = ({ pokemon }) => {
@@ -67,7 +68,8 @@ const styles = StyleSheet.create({
         height: 125
     },
     modal: {
-        flexDirection: "row"
+        flexDirection: "column",
+        alignItems: "center"
     },
     leftModal: {
         alignItems: "center",
@@ -79,9 +81,9 @@ const styles = StyleSheet.create({
         marginTop: 7,
     },
     rightModal: {
-        marginLeft: 30,
+        justifyContent: "center",
         marginBottom: 5,
-        width: "50%"
+        width: "70%"
     },
     description: {
         flexDirection: "row",

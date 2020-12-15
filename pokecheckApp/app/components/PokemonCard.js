@@ -1,15 +1,28 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, Image, TouchableWithoutFeedback } from "react-native";
+import { ProgressBar, Colors } from "react-native-paper";
 import ColorType from "./ColorType";
 import Modal from "./Modal";
 
-const PokemonCard = ({ name, image, typeList, id, weight, height }) => {
+const PokemonCard = ({ name, 
+                       image, 
+                       typeList, 
+                       id, 
+                       weight, 
+                       height,
+                       hp,
+                       attack,
+                       defense,
+                       specialAttack,
+                       specialDefense,
+                       speed }) => {
 
     const [showModal, setShowModal] = useState(false);
 
     const card_id = `N #${id}`;
     const card_name = capitalize(name);
-    const type = capitalize(typeList);
+    const type = typeList.split("/")[0];
+
 
     const onPress = () => {
         setShowModal(true);
@@ -22,17 +35,19 @@ const PokemonCard = ({ name, image, typeList, id, weight, height }) => {
                     backgroundColor: "white",
                     borderRadius: 10,
                     borderWidth: 3,
-                    borderColor: ColorType[typeList],
-                    marginTop: 40,
-                    marginBottom: 12,
+                    borderColor: ColorType[type],
+                    marginTop: 15,
+                    marginBottom: 13,
+                    marginRight: 8,
+                    marginLeft: 8,
                     justifyContent: "center",
                     alignItems: "center",
-                    width: 150
+                    width: 110
                 }}>
                     <View>
                         <Image 
                         style={styles.picture} 
-                        source={{uri: `${image}`}}
+                        source={{uri:`${image}`}}
                         />
                     </View>
                     <Text>
@@ -47,8 +62,8 @@ const PokemonCard = ({ name, image, typeList, id, weight, height }) => {
                 <View style={styles.modal}>
                     <View style={styles.leftModal}>
                         <Image 
-                            style={styles.picture} 
-                            source={{uri: `${image}`}}
+                            style={styles.pictureModal} 
+                            source={{uri:`${image}`}}
                         />
                     </View>
                     <View style={styles.rightModal}>
@@ -62,7 +77,7 @@ const PokemonCard = ({ name, image, typeList, id, weight, height }) => {
                         </View>
                         <View style={styles.description}>
                             <Text style={styles.data}>Type:</Text>
-                            <Text>{`${type}`}</Text>
+                            <Text>{`${capitalize(type)}`}</Text>
                         </View>
                         <View style={styles.description}>
                             <Text style={styles.data}>Height:</Text>
@@ -73,6 +88,24 @@ const PokemonCard = ({ name, image, typeList, id, weight, height }) => {
                             <Text>{`${parseFloat(Math.round(weight/10*100)/100).toFixed(1)} kg`}</Text>
                         </View>
                     </View>
+                    <View style={styles.statsContainer}>
+                        <View style={styles.barContainer}>
+                        <Text>{`HP (${hp})`}</Text>
+                        <ProgressBar progress={hp/120} color={Colors.red800}/>
+                        </View>
+                        <View style={styles.barContainer}>
+                        <Text>{`Attack (${attack})`}</Text>
+                        <ProgressBar progress={attack/120} color={Colors.yellow800}/>
+                        </View>
+                        <View style={styles.barContainer}>
+                        <Text>{`Defense (${defense})`}</Text>
+                        <ProgressBar progress={defense/120} color={Colors.blue800}/>
+                        </View>
+                        <View style={styles.barContainer}>
+                        <Text>{`Speed (${speed})`}</Text>
+                        <ProgressBar progress={speed/120} color={Colors.green800}/>
+                        </View>
+                    </View>
                 </View>
             </Modal>
         </View>
@@ -80,6 +113,8 @@ const PokemonCard = ({ name, image, typeList, id, weight, height }) => {
 
 };
 //<Text style={styles.nameStyle}>{card_name}</Text>
+//source={require("../../assets/pokemonSprites/1.png")}
+//source={{uri: `${image}`}}
 const capitalize = (s) => {
   		if (typeof s !== 'string') return ''
   		return s.charAt(0).toUpperCase() + s.slice(1)
@@ -87,8 +122,19 @@ const capitalize = (s) => {
 
 const styles = StyleSheet.create({
     picture: {
-        width: 125,
-        height: 125
+        width: 100,
+        height: 100
+    },
+    pictureModal: {
+        width: 140,
+        height: 140
+    },
+    barContainer: {
+        marginTop: 2
+    },
+    statsContainer: {
+        width: "70%",
+        justifyContent: "flex-start"
     },
     containerPic: {
         backgroundColor: "red"
@@ -98,7 +144,8 @@ const styles = StyleSheet.create({
         marginBottom: 2
     },
     modal: {
-        flexDirection: "row"
+        flexDirection: "column",
+        alignItems: "center"
     },
     leftModal: {
         alignItems: "center",
@@ -110,9 +157,9 @@ const styles = StyleSheet.create({
         marginTop: 7,
     },
     rightModal: {
-        marginLeft: 30,
+        justifyContent: "center",
         marginBottom: 5,
-        width: "50%"
+        width: "70%"
     },
     description: {
         flexDirection: "row",

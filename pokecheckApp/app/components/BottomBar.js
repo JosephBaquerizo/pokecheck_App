@@ -25,11 +25,19 @@ const BottomBar = () => {
             setLoading(true);
             const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${searchPokemon}`);
             const json = await response.json();
+            let tipos = "";
+            for (let i=0; i < json.types.length; i++) {
+                if (i != json.types.length - 1) {
+                    tipos = tipos.concat(json.types[i].type.name, "/");
+                } else {
+                    tipos = tipos.concat(json.types[i].type.name);
+                }
+            }
             const info = {
                 name: json.name,
                 id: json.id,
                 image: json.sprites.front_default,
-                typeList: json.types[0].type.name,
+                typeList: tipos,
                 height: json.height,
                 weight: json.weight
             };
@@ -55,7 +63,7 @@ const BottomBar = () => {
             </TouchableOpacity>
             <Modal isVisible={showModal} setIsVisible={setShowModal}>
                 <Input
-                    placeholder="Search pokemon by name or id #"
+                    placeholder="Search pokemon"
                     onChange={(e) => onChange(e)}
                     rightIcon={
                         <Icon 
