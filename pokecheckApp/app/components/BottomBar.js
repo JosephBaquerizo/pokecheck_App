@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { Image, StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import { Image, StyleSheet, View, Text, TouchableOpacity, Alert } from "react-native";
 import Modal from "./Modal";
 import { Input, Icon, Button } from "react-native-elements";
 import UnderSearch from "./UnderSearch";
 import Loading from "./Loading";
+import NetInfo from "@react-native-community/netinfo"
 
 const BottomBar = () => {
 
@@ -21,6 +22,18 @@ const BottomBar = () => {
     }
 
     async function pokemonRequest() {
+        NetInfo.fetch().then(state => {
+            if (state.isConnected == false) {
+                Alert.alert(
+                    "Connection Error",
+                    "Please verify that your device is connected to a network",
+                [
+                    { text: "OK"}
+                ],
+                    { cancelable: false }
+                );
+            }
+        });
         try {
             setLoading(true);
             const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${searchPokemon}`);
@@ -39,7 +52,11 @@ const BottomBar = () => {
                 image: json.sprites.front_default,
                 typeList: tipos,
                 height: json.height,
-                weight: json.weight
+                weight: json.weight,
+                hp: json.stats[0].base_stat,
+                attack: json.stats[1].base_stat,
+                defense: json.stats[2].base_stat,
+                speed: json.stats[5].base_stat
             };
             setPokemon(info);
         } catch(error) {

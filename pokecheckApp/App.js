@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {Component, useEffect} from 'react';
-import { StyleSheet, Text, View, Alert } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import MainView from "./app/screens/MainView";
 import TopBar from "./app/components/TopBar";
 import PokemonContainer from "./app/components/PokemonContainer";
@@ -20,18 +20,6 @@ class App extends Component {
   }
 
   async componentDidMount() {
-    NetInfo.fetch().then(state => {
-      if (state.isConnected == false) {
-        Alert.alert(
-          "Connection Error",
-          "Please verify that your device is connected to a network",
-          [
-            { text: "OK"}
-          ],
-          { cancelable: false }
-        );
-      }
-    });
     Audio.setAudioModeAsync({
       allowsRecordingIOS: false,
       interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX,
